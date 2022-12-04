@@ -124,10 +124,14 @@ function readNumber(num){
         if (i !== numArr.length - 1 && numArr.length - i > 1){
             switch ((numArr.length - i - 1) % 3){
                 case 1: 
-                    digitReader += "nghìn "
+                    if (parseInt(numArr[i]) !== 0){
+                        digitReader += "nghìn "
+                    }
                     break
                 case 2:
-                    digitReader += "triệu "
+                    if (parseInt(numArr[i]) !== 0){
+                        digitReader += "triệu "
+                    }
                     break
                 case 0:
                     digitReader += "tỷ "
