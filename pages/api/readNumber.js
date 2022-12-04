@@ -120,16 +120,18 @@ function readNumber(num){
         let digitReader = ""
         if (parseInt(numArr[i]) !== 0 || i === numArr.length - 1){
             digitReader += readPart(numArr[i])
-            switch ((numArr.length - i) % 5){
-                case 2: 
-                    digitReader += "nghìn "
-                    break
-                case 3:
-                    digitReader += "triệu "
-                    break
-                case 4:
-                    digitReader += "tỷ "
-                    break
+            if (i !== numArr.length - 1 && numArr.length - i > 0){
+                switch ((numArr.length - i) % 3){
+                    case 1: 
+                        digitReader += "nghìn "
+                        break
+                    case 2:
+                        digitReader += "triệu "
+                        break
+                    case 0:
+                        digitReader += "tỷ "
+                        break
+                }
             }
         }
         reader += digitReader
