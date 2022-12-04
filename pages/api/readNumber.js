@@ -4,9 +4,9 @@ function reverse(s){
 
 function checkNegative(num){
     let isNegative = false
-    if (num[0] === '-'){
+    if (num[0] === '-' && num.length > 1){
         isNegative = true
-        num.splice(0, 1)
+        num = num.substring(1, num.length)
     }
     return [isNegative, num]
 }
@@ -26,7 +26,7 @@ function checkValid(num){
 function trimNumber(num){
     //Delete 0 digit at head
     while (num[0] === '0' && num.length > 1){
-        num.splice(0, 1)
+        num = num.substring(1, num.length)
     }
     return num
 }
