@@ -1,3 +1,7 @@
+function reverse(s){
+    return s.split("").reverse().join("");
+}
+
 function checkNegative(num){
     let isNegative = false
     if (num[0] === '-'){
@@ -21,7 +25,7 @@ function checkValid(num){
 
 function trimNumber(num){
     //Delete 0 digit at head
-    while (num[0] === '0'){
+    while (num[0] === '0' && num.length > 1){
         num.splice(0, 1)
     }
     return num
@@ -30,15 +34,17 @@ function trimNumber(num){
 function formatNumber(num){
     let formattedNumber = []
     let i = 0
+    num = reverse(num)
 
     for (i = 1; i * 3 <= num.length; i++){
-        formattedNumber.push(num.substring(3 * (i - 1), 3 * i))
+        formattedNumber.push(reverse(num.substring(3 * (i - 1), 3 * i)))
     }
 
-    if (i < num.length){
-        formattedNumber.push(3 * (i - 1), num.length)
+    if (3 * (i - 1) < num.length){
+        formattedNumber.push(reverse(num.substring(3 * (i - 1), num.length)))
     }
-    return formattedNumber
+
+    return formattedNumber.reverse()
 }
 
 function readPart(num){
@@ -47,7 +53,7 @@ function readPart(num){
 
     for (let i = 0; i < num.length; i++){
         let numberDigit = ""
-        switch (num - i){
+        switch (num.length - i){
             case 1:
                 numberDigit += numberName[parseInt(num[i])] + " "
                 if (num.length > 1){
@@ -91,11 +97,14 @@ function readPart(num){
 
     return result
 }
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 function readNumber(num){
     //Check if num is a string and just contain only number character or negative sign
-    let isNegative = false
-    [isNegative, num] = checkNegative(num)
+    let [isNegative, n] = checkNegative(num)
+    num = n
     if (!checkValid(num)){
         return [400, "The number is in wrong format"]
     }
@@ -109,20 +118,28 @@ function readNumber(num){
     //For loop to read each part of numArr
     for (let i = 0; i < numArr.length; i++){
         let digitReader = ""
-        if (parseInt(numArr) !== 0 || i === 0){
+        if (parseInt(numArr[i]) !== 0 || i === numArr.length - 1){
             digitReader += readPart(numArr[i])
-            switch (i % 4){
-                case 1: 
+            switch ((numArr.length - i) % 5){
+                case 2: 
                     digitReader += "nghìn "
                     break
-                case 2:
-                    digitReader += "triệu "
                 case 3:
+                    digitReader += "triệu "
+                    break
+                case 4:
                     digitReader += "tỷ "
+                    break
             }
         }
         reader += digitReader
     }
+
+    if (isNegative){
+        reader = "âm " + reader
+    }
+
+    reader = capitalizeFirstLetter(reader)
 
     return [200, reader]
 }
