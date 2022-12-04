@@ -121,7 +121,7 @@ function readNumber(num){
         if (parseInt(numArr[i]) !== 0 || i === numArr.length - 1){
             digitReader += readPart(numArr[i])
             if (i !== numArr.length - 1 && numArr.length - i > 1){
-                switch ((numArr.length - i) % 3){
+                switch ((numArr.length - i - 1) % 3){
                     case 1: 
                         digitReader += "nghìn "
                         break
