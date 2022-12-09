@@ -1,11 +1,14 @@
-const {spawn} = require("child_process")
+import { spawn } from "child_process"
+const path = require("path")
 
 export default function handler(req, res) {
     if (req.method === "POST"){
-        const cropProgram = spawn("python", ['crop.py', req.body.file])
-
-        cropProgram.stdout.on('data', (data)=>{
-            res.status(200).json({"status": "window.location.origin/" + data})
+        return new Promise((resolve, reject) => {
+            const cropProgram = spawn("python", [process.cwd() + "\\public\\crop.py", req.body.file])
+        
+            cropProgram.stdout.on('data', (data)=>{
+                resolve(res.status(200).json({"file": data.toString()}))
+            })
         })
     }
 }

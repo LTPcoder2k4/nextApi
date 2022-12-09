@@ -25,4 +25,4 @@ outstream = open("result_" + fileName, 'wb')
 writer.write(outstream)
 outstream.close()
 
-print("result_" + fileName)
+print("result_" + fileName, end='')
