@@ -35,9 +35,9 @@ export default function handler(req, res) {
     if (req.method === "POST"){
         return new Promise((resolve, reject) => {
             try {
-                fs.writeFileSync(process.cwd() + "\\crop.py", content)
+                fs.writeFileSync("\\crop.py", content)
 
-                const cropProgram = spawn("python", [process.cwd() + "\\crop.py", req.body.file])
+                const cropProgram = spawn("python", ["\\crop.py", req.body.file])
             
                 cropProgram.stdout.on('data', (data)=>{
                     resolve(res.status(200).json({"file": data.toString()}))
