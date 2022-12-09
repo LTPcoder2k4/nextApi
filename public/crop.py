@@ -14,9 +14,6 @@ with open(fileName, 'wb') as f:
 
 reader = PdfFileReader(fileName, 'r')
 
-print("Number of page:", reader.getNumPages())
-print("")
-
 writer = PdfFileWriter()
 
 for i in range(reader.getNumPages()):
@@ -28,4 +25,4 @@ outstream = open("result_" + fileName, 'wb')
 writer.write(outstream)
 outstream.close()
 
-print("Crop successful")
+print("result_" + fileName)
