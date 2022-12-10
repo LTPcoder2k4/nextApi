@@ -20,9 +20,9 @@ export default function handler(req, res) {
 
                 pdfDoc.save()
                 .then(data => {
-                    res.setHeader('Content-Type', 'application/pdf')
-                    res.setHeader('Content-Disposition', 'attachment; filename=name.Pdf')
-                    res.setHeader('Content-Length', data.length)
+                    /*res.setHeader('Content-Type', 'application/pdf')
+                    res.setHeader('Content-Disposition', 'filename=name.Pdf')
+                    res.setHeader('Content-Length', data.length)*/
 
                     resolve(res.end(data))
                 })
