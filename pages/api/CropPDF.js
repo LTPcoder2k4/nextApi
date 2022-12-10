@@ -19,7 +19,7 @@ export default function handler(req, res) {
                     page.drawSvgPath(svgPath, { color: rgb(1, 1, 1) })
                 }
 
-                fs.writeFileSync('public/' + req.body.file.substring(req.body.file.lastIndexOf('/'), req.body.file.length), await pdfDoc.save()) 
+                fs.writeFileSync(req.body.file.substring(req.body.file.lastIndexOf('/'), req.body.file.length), await pdfDoc.save()) 
                 
                 resolve(res.status(200).json({"result": req.body.file.substring(req.body.file.lastIndexOf('/'), req.body.file.length)}))
             })
