@@ -1,5 +1,4 @@
 import {PDFDocument, rgb} from 'pdf-lib'
-const fs = require('fs')
 
 export default function handler(req, res) {
     if (req.method === "POST"){
