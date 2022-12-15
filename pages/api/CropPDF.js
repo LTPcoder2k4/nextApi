@@ -19,7 +19,8 @@ export default function handler(req, res) {
                     page.drawSvgPath(svgPath, { color: rgb(1, 1, 1) })
                 }
 
-                fs.writeFileSync('./public/downloads/' + req.body.file.substring(req.body.file.lastIndexOf('/') + 1, req.body.file.length), await pdfDoc.save())
+                let fileName = req.body.file.substring(req.body.file.lastIndexOf('/') + 1, req.body.file.length)
+                fs.writeFileSync('./public/downloads/' + fileName, await pdfDoc.save())
                 
                 /*
                 pdfDoc.save().then(data => {
@@ -29,7 +30,7 @@ export default function handler(req, res) {
 
                     resolve(res.end(data))
                 })*/
-                resolve(res.status(200).json({"file": '/downloads/' + req.body.file.substring(req.body.file.lastIndexOf('/') + 1, req.body.file.length)}))
+                resolve(res.status(200).json({"file": '/downloads/' + fileName}))
                 
             })
         })
