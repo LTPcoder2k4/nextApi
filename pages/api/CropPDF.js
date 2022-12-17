@@ -21,7 +21,7 @@ export default function handler(req, res) {
 
                 let fileName = req.body.file.substring(req.body.file.lastIndexOf('/') + 1, req.body.file.length)
                 fs.writeFileSync('./public/downloads/' + fileName, await pdfDoc.save())
-                resolve(res.status(200).json({"file": '/downloads/' + fileName}))
+                resolve(res.status(200).json({"file": '/api/downloads/' + fileName}))
                 
             })
         })
